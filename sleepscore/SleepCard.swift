@@ -13,19 +13,22 @@ struct Sleep {
     let subtitle: String
     let image: String
     let duration: String
+    let date: String
 }
+
 
 struct SleepCard: View {
     @State var sleep: Sleep
+    
     var body: some View {
         ZStack {
             
-            Color(uiColor: .systemGray6).cornerRadius(15)
+            Color(.systemGray6).cornerRadius(15)
             VStack {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("hours slept")
-                        Text("today")
+                        Text("last night")
+                        Text(sleep.date)
                             .font(.caption)
                     }
                     Spacer()
@@ -44,6 +47,6 @@ struct SleepCard: View {
 
 struct SleepCard_Previews: PreviewProvider {
     static var previews: some View {
-        SleepCard(sleep: Sleep(id: 0, title: "hi", subtitle: "subtitle", image: "hourglass.bottomhalf.fille", duration: "73hr 20m"))
+        SleepCard(sleep: Sleep(id: 0, title: "hi", subtitle: "subtitle", image: "hourglass.bottomhalf.filled", duration: "73hr 20m", date: "date"))
     }
 }

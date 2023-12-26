@@ -1,13 +1,17 @@
-import HealthKit
 import Foundation
+import HealthKit
 extension Date {
     static var startOfDay: Date {
         Calendar.current.startOfDay(for: Date())
     }
+    
 }
+
+
 
 class HealthManager: ObservableObject {
     let healthStore = HKHealthStore()
+    @Published var sleeps: [String: Sleep] = [:]
     
     init() {
         let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
@@ -22,13 +26,29 @@ class HealthManager: ObservableObject {
         }
     }
     
-    func getSleepDuration(completion: @escaping (TimeInterval?, Error?) -> Void) {
+   
+    func formatDateToString(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d" // Format for "Wednesday, January 1"
+        dateFormatter.locale = Locale(identifier: "en_US") // Set locale if needed
+
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
+    func convertSecondsToHoursMinutes(seconds: TimeInterval) -> (hours: Int, minutes: Int) {
+        let hours = Int(seconds) / 3600
+        let minutes = Int(seconds) / 60 % 60
+        return (hours, minutes)
+    }
+    func getSleepDuration(startDate: Date, endDate: Date, completion: @escaping (TimeInterval?, Error?) -> Void) {
         guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
             completion(nil, NSError(domain: "com.yourapp.healthkit", code: 1, userInfo: [NSLocalizedDescriptionKey: "Sleep analysis not available"]))
             return
         }
         
-        let query = HKSampleQuery(sampleType: sleepType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+        
+        let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
             guard let samples = samples as? [HKCategorySample], error == nil else {
                 completion(nil, error)
                 return
@@ -41,10 +61,23 @@ class HealthManager: ObservableObject {
                 totalSleepTime += sleepTime
             }
             
+            let sleepDate = startDate;
+            
+            
+           
+            let (hours, minutes) = self.convertSecondsToHoursMinutes(seconds: totalSleepTime)
+                        let durationString = "\(hours) hours \(minutes) minutes"
+            
+            let sleep = Sleep(id: 0, title: "hi", subtitle: "hi", image: "hourglass.bottomhalf.filled", duration: durationString, date: self.formatDateToString(sleepDate))
+            DispatchQueue.main.async {
+                self.sleeps["todaysDuration"] = sleep;
+            }
+            
             completion(totalSleepTime, nil)
         }
         
-        print(query)
+        
         healthStore.execute(query)
     }
+    
 }
