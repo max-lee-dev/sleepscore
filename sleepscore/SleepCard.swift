@@ -12,7 +12,8 @@ struct Sleep {
     let title: String
     let subtitle: String
     let image: String
-    let duration: String
+    let hours: String
+    let minutes: String
     let date: String
 }
 
@@ -26,20 +27,35 @@ struct SleepCard: View {
             Color(.systemGray6).cornerRadius(15)
             VStack {
                 HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("last night")
-                        Text(sleep.date)
-                            .font(.caption)
+                    HStack {
+                        Text("LAST NIGHT")
+                            .font(.system(size:13))
+                        Spacer()
+                        Text("+ 105pts").font(.system(size: 12))
                     }
                     Spacer()
                     Image(systemName: sleep.image)
                         .foregroundColor(.green)
                 }
                 .padding()
-                
-                Text(sleep.duration)
-                    .font(.system(size: 24))
-                    .padding()
+                HStack(spacing: 10){
+                    HStack(spacing: 0.0){
+                        
+                        Text(sleep.hours)
+                            .font(.system(size: 40).bold())
+                        
+                        Text("hr").font(.system(size:40))
+                    }
+                    
+                    HStack(spacing: 0.0) {
+                        Text(sleep.minutes)
+                            .font(.system(size: 40).bold())
+                        Text("min").font(.system(size:40))
+                    }
+
+                    Spacer()
+                }.padding(.horizontal)
+                Spacer()
             }
         }
     }
@@ -47,6 +63,6 @@ struct SleepCard: View {
 
 struct SleepCard_Previews: PreviewProvider {
     static var previews: some View {
-        SleepCard(sleep: Sleep(id: 0, title: "hi", subtitle: "subtitle", image: "hourglass.bottomhalf.filled", duration: "73hr 20m", date: "date"))
+        SleepCard(sleep: Sleep(id: 0, title: "hi", subtitle: "subtitle", image: "hourglass.bottomhalf.fille", hours: "5", minutes: "23", date: "date"))
     }
 }

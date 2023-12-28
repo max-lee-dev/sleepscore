@@ -29,10 +29,11 @@ class HealthManager: ObservableObject {
    
     func formatDateToString(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM d" // Format for "Wednesday, January 1"
+        dateFormatter.dateFormat = "EEEE, MMM d" // Format for "Wednesday, January 1"
         dateFormatter.locale = Locale(identifier: "en_US") // Set locale if needed
 
         let dateString = dateFormatter.string(from: date)
+        
         return dateString
     }
     func convertSecondsToHoursMinutes(seconds: TimeInterval) -> (hours: Int, minutes: Int) {
@@ -66,9 +67,9 @@ class HealthManager: ObservableObject {
             
            
             let (hours, minutes) = self.convertSecondsToHoursMinutes(seconds: totalSleepTime)
-                        let durationString = "\(hours) hours \(minutes) minutes"
             
-            let sleep = Sleep(id: 0, title: "hi", subtitle: "hi", image: "hourglass.bottomhalf.filled", duration: durationString, date: self.formatDateToString(sleepDate))
+            
+            let sleep = Sleep(id: 0, title: "hi", subtitle: "hi", image: "hourglass.bottomhalf.filled", hours: "\(hours)", minutes: "\(minutes)", date: self.formatDateToString(sleepDate))
             DispatchQueue.main.async {
                 self.sleeps["todaysDuration"] = sleep;
             }
