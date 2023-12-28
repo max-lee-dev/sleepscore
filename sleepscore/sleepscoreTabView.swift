@@ -27,6 +27,7 @@ struct sleepscoreTabView: View {
                     }
                     .environmentObject(manager)
                     .environmentObject(dataManager)
+                    
                 LogIn()
                     .tag("Log In")
                     .tabItem{

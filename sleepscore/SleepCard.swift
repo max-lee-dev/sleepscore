@@ -24,8 +24,8 @@ struct SleepCard: View {
     var body: some View {
         ZStack {
             
-            Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(15)
-            VStack {
+            Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(20, corners: [.topLeft, .topRight])
+            VStack (spacing: 20) {
                 HStack(alignment: .top) {
                     HStack {
                         Text("LAST NIGHT")
@@ -38,7 +38,7 @@ struct SleepCard: View {
                     Spacer()
                   
                 }
-                .padding()
+                .padding(.horizontal).padding(.top)
                 HStack(spacing: 10){
                     HStack(spacing: 0.0){
                         
@@ -59,12 +59,46 @@ struct SleepCard: View {
                             .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
 
                     }
+                    Spacer()
+                    
 
                     Spacer()
                 }.padding(.horizontal)
+                
+               
                 Spacer()
             }
+           
         }
+        ZStack {
+            Color(red: 10/255, green: 8/255, blue: 73/255, opacity: 1)
+            Text("your 4th best out of your past 10 sleeps!")
+                .foregroundColor(.white)
+                .padding()
+                
+        }.frame(width: .infinity, height: 50)
+            .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+        
+        
+       
+        
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
 

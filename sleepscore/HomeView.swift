@@ -27,24 +27,32 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Spacer()
-            Image("sleepscorebackgroundmpb")
+            Image("sleepscorebackground")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+//                .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .ignoresSafeArea()
             
-            VStack(spacing: 0.0){
+            VStack(spacing: 0){
             
                 
                 HStack {
                     Text(manager.formatDateToString(now).lowercased()).fontWeight(.bold).font(.system(size: 27))
                         .foregroundColor(.white)
                         
+                        
                     Spacer()
-                    Text("🔥 1")
-                        .foregroundColor(Color(.orange))
-                }.padding().offset(y:10).padding(.top)
-                Spacer()
+                    HStack(spacing: 0) {
+                        Text("🔥5")
+                            .foregroundColor(.orange)
+                            .font(.title2)
+                            .bold()
+                            .frame(width: 60, height: 30)
+                    }.background(Color(red: 65/255, green: 36/255, blue: 138/255, opacity: 1))
+                        .cornerRadius(10)
+
+                        
+                }.padding()
                 
                 VStack {
                     LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
@@ -54,7 +62,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                     Spacer()
-                }
+                }.padding(.top)
 //                NavigationView {
 //                    List(dataManager.users, id: \.id) { user in
 //                        Text(user.displayName)
@@ -72,7 +80,7 @@ struct HomeView: View {
 //                TextField("User", text: $displayName)
 //                    .foregroundColor(.red)
                 
-            }.padding(.top)
+            }
             
             
                 .onAppear {
@@ -87,7 +95,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                }.padding(.top)
+                }
             
             
         }
