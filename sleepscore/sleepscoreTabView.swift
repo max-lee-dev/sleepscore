@@ -12,24 +12,29 @@ struct sleepscoreTabView: View {
     @StateObject var dataManager = DataManager()
     @State var selectedTab = "Home"
     var body: some View {
-        TabView(selection: $selectedTab) {
             
+        
             
-            HomeView()
-                .tag("Home")
-                .tabItem{
-                    Image(systemName: "house")
-                }
-                .environmentObject(manager)
-                .environmentObject(dataManager)
-            LogIn()
-                .tag("Log In")
-                .tabItem{
-                    Image(systemName: "person")
-                }
-            
+            TabView(selection: $selectedTab) {
+                
+                
+                
+                
+                HomeView()
+                    .tag("Home")
+                    .tabItem{
+                        Image(systemName: "house")
+                    }
+                    .environmentObject(manager)
+                    .environmentObject(dataManager)
+                LogIn()
+                    .tag("Log In")
+                    .tabItem{
+                        Image(systemName: "person")
+                    }
+                
+            }
         }
-    }
 }
 
 struct sleepscoreTabView_Previews: PreviewProvider {

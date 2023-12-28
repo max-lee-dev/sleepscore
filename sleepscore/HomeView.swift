@@ -25,60 +25,73 @@ struct HomeView: View {
     
     
     var body: some View {
-        VStack(spacing: 0.0){
-            
-            HStack {
-                Text(manager.formatDateToString(now).lowercased()).fontWeight(.bold).font(.title2)
-                Spacer()
-                Text("🔥 1")
-            }.padding()
+        ZStack {
             Spacer()
+            Image("sleepscorebackgroundmpb")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .ignoresSafeArea()
             
-            VStack {
-                LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
-                    ForEach(manager.sleeps.sorted(by: {$0.value.id < $1.value.id}), id: \.key) {
-                        item in SleepCard(sleep: item.value)
-                    }
-                }
-                .padding(.horizontal)
+            VStack(spacing: 0.0){
+            
+                
+                HStack {
+                    Text(manager.formatDateToString(now).lowercased()).fontWeight(.bold).font(.system(size: 27))
+                        .foregroundColor(.white)
+                        
+                    Spacer()
+                    Text("🔥 1")
+                        .foregroundColor(Color(.orange))
+                }.padding().offset(y:10).padding(.top)
                 Spacer()
-            }
-            Spacer()
-            NavigationView {
-                List(dataManager.users, id: \.id) { user in
-                    Text(user.displayName)
-                }
-                .navigationTitle("users")
-                .navigationBarItems(trailing: Button(action: {
-                    dataManager.addUser(displayName: displayName)
-                }, label: {
-                    Image(systemName: "plus")
-                }))
                 
-                
-                
-            }
-            TextField("User", text: $displayName)
-                .foregroundColor(.red)
-                
-        }.padding(.vertical)
-    
-        
-        .onAppear {
-            // Call the method to fetch sleep duration when the  view appears
-            if let yesterday = calendar.date(byAdding: .day, value: -1, to: now)  {
-                
-                
-                manager.getSleepDuration(startDate: yesterday, endDate: now) { sleepDuration, error in
-                    if let error = error {
-                        print("Error fetching sleep duration: \(error.localizedDescription)")
-                        return
+                VStack {
+                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
+                        ForEach(manager.sleeps.sorted(by: {$0.value.id < $1.value.id}), id: \.key) {
+                            item in SleepCard(sleep: item.value)
+                        }
                     }
+                    .padding(.horizontal)
+                    Spacer()
                 }
-            }
+//                NavigationView {
+//                    List(dataManager.users, id: \.id) { user in
+//                        Text(user.displayName)
+//                    }
+//                    .navigationTitle("users")
+//                    .navigationBarItems(trailing: Button(action: {
+//                        dataManager.addUser(displayName: displayName)
+//                    }, label: {
+//                        Image(systemName: "plus")
+//                    }))
+//                    
+//                    
+//                    
+//                }
+//                TextField("User", text: $displayName)
+//                    .foregroundColor(.red)
+                
+            }.padding(.top)
+            
+            
+                .onAppear {
+                    // Call the method to fetch sleep duration when the  view appears
+                    if let yesterday = calendar.date(byAdding: .day, value: -1, to: now)  {
+                        
+                        
+                        manager.getSleepDuration(startDate: yesterday, endDate: now) { sleepDuration, error in
+                            if let error = error {
+                                print("Error fetching sleep duration: \(error.localizedDescription)")
+                                return
+                            }
+                        }
+                    }
+                }.padding(.top)
+            
+            
         }
-        
-        
+
     }
 }
 

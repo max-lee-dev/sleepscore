@@ -24,18 +24,19 @@ struct SleepCard: View {
     var body: some View {
         ZStack {
             
-            Color(.systemGray6).cornerRadius(15)
+            Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(15)
             VStack {
                 HStack(alignment: .top) {
                     HStack {
                         Text("LAST NIGHT")
                             .font(.system(size:13))
+                            .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
                         Spacer()
                         Text("+ 105pts").font(.system(size: 12))
+                            .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
                     }
                     Spacer()
-                    Image(systemName: sleep.image)
-                        .foregroundColor(.green)
+                  
                 }
                 .padding()
                 HStack(spacing: 10){
@@ -43,14 +44,20 @@ struct SleepCard: View {
                         
                         Text(sleep.hours)
                             .font(.system(size: 40).bold())
+                            .foregroundColor(.white)
                         
                         Text("hr").font(.system(size:40))
+                            .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
+
                     }
                     
                     HStack(spacing: 0.0) {
                         Text(sleep.minutes)
                             .font(.system(size: 40).bold())
+                            .foregroundColor(.white)
                         Text("min").font(.system(size:40))
+                            .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
+
                     }
 
                     Spacer()
