@@ -15,8 +15,8 @@ struct sleepscoreApp: App {
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var username = ""
-    @State private var email = ""
-    @State private var password = ""
+    @State private var email = "accounta@gmail.com"
+    @State private var password = "123123"
     
     
     init() {
@@ -25,8 +25,9 @@ struct sleepscoreApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if userIsLoggedIn {
+            if (dataManager.loggedIn) {
                 sleepscoreTabView()
+                    .environmentObject(dataManager)
             } else {
                 LogIn
             }
@@ -64,6 +65,7 @@ struct sleepscoreApp: App {
                     .frame(width:350, height: 1)
                     .foregroundColor(.white)
                     .padding(.bottom)
+                Text(dataManager.currentUser?.firstName ?? "dont have")
                 
                 TextField("", text: $lastName)
                     .foregroundColor(.white)
@@ -164,7 +166,7 @@ struct sleepscoreApp: App {
             .onAppear {
                 Auth.auth().addStateDidChangeListener{auth, user in
                     if user != nil {
-                        userIsLoggedIn.toggle()
+                        dataManager.logIn()
                     }
                 }
             }

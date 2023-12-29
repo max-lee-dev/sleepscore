@@ -8,17 +8,24 @@
 import SwiftUI
 import Firebase
 struct LogIn: View {
+    @EnvironmentObject var dataManager : DataManager
     var body: some View {
         ZStack {
             VStack {
-                Text("hia")
-                    .foregroundColor(.black)
+                if (dataManager.loggedIn) {
+                    Text("lgged in")
+                        .foregroundColor(.gray)
+                } else {
+                    Text("nah")
+                        .foregroundColor(.gray)
+                }
                 Button {
-                    signout()
+                    dataManager.logOut()
                 } label: {
                     Text("signout")
                 }
             }
+            
         }
     }
     

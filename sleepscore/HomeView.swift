@@ -18,7 +18,7 @@ struct HomeView: View {
     
     
     @EnvironmentObject var manager: HealthManager
-    @EnvironmentObject var dataManager: DataManager
+    @StateObject var dataManager: DataManager // Have my own dataManager that will have updated data! Not sure if this is good solution but it'll do
     
     
     
@@ -60,9 +60,23 @@ struct HomeView: View {
                             item in SleepCard(sleep: item.value)
                         }
                     }
-                    .padding(.horizontal)
+                    .padding()
+                    VStack {
+                        if (dataManager.currentUserLoading == true) {
+                            Text("loading...")
+                            
+                        } else {
+                            Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
+                                .foregroundColor(.white)
+                        
+                        }
+                    }.padding()
+                    
                     Spacer()
+                    
                 }.padding(.top)
+                          
+                Spacer()
 //                NavigationView {
 //                    List(dataManager.users, id: \.id) { user in
 //                        Text(user.displayName)
@@ -106,7 +120,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(DataManager())
             .environmentObject(HealthManager())
     }
 }

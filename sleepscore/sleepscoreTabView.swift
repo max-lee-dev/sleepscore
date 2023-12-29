@@ -9,7 +9,7 @@ import SwiftUI
 
 struct sleepscoreTabView: View {
     @StateObject var manager = HealthManager()
-    @StateObject var dataManager = DataManager()
+    @EnvironmentObject var dataManager : DataManager
     @State var selectedTab = "Home"
     var body: some View {
             
@@ -26,13 +26,13 @@ struct sleepscoreTabView: View {
                         Image(systemName: "house")
                     }
                     .environmentObject(manager)
-                    .environmentObject(dataManager)
                     
                 LogIn()
                     .tag("Log In")
                     .tabItem{
                         Image(systemName: "person")
                     }
+                    .environmentObject(dataManager)
                 
             }
         }
@@ -41,5 +41,6 @@ struct sleepscoreTabView: View {
 struct sleepscoreTabView_Previews: PreviewProvider {
     static var previews: some View {
         sleepscoreTabView()
+            .environmentObject(DataManager())
     }
 }
