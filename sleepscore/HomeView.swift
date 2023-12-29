@@ -18,7 +18,7 @@ struct HomeView: View {
     
     
     @EnvironmentObject var manager: HealthManager
-    @StateObject var dataManager: DataManager // Have my own dataManager that will have updated data! Not sure if this is good solution but it'll do
+    @StateObject var dataManager = DataManager() // Have my own dataManager that will have updated data! Not sure if this is good solution but it'll do
     
     
     

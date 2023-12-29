@@ -9,11 +9,12 @@ import SwiftUI
 import Firebase
 struct LogIn: View {
     @EnvironmentObject var dataManager : DataManager
+    @StateObject var newDataManager = DataManager()
     var body: some View {
         ZStack {
             VStack {
                 if (dataManager.loggedIn) {
-                    Text("lgged in")
+                    Text("lgged in as \(newDataManager.currentUser?.firstName ?? "nvm")")
                         .foregroundColor(.gray)
                 } else {
                     Text("nah")
