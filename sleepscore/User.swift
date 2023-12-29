@@ -9,7 +9,12 @@ import SwiftUI
 
 struct User: Identifiable {
     var id: String
+    var firstName: String
+    var lastName: String
+    var username: String
+    var email: String
     
-    var displayName: String
+    
+
     
 }

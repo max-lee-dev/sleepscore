@@ -27,7 +27,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Spacer()
-            Image("sleepscorebackground")
+            Image("sleepscorehomebackground")
                 .resizable()
 //                .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity)

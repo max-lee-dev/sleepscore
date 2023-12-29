@@ -11,6 +11,10 @@ import Firebase
 @main
 struct sleepscoreApp: App {
     @State private var userIsLoggedIn = false
+    @StateObject var dataManager = DataManager()
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var username = ""
     @State private var email = ""
     @State private var password = ""
     
@@ -42,7 +46,58 @@ struct sleepscoreApp: App {
                 Text("welcome")
                     .foregroundColor(.white)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
-                    .offset(y: -200)
+                    .offset(y: -100)
+                
+                TextField("", text: $firstName)
+                    .foregroundColor(.white)
+                    .textFieldStyle(.plain)
+                    .placeholder(when: firstName.isEmpty) {
+                        Text("first name")
+                            .foregroundColor(.white)
+                            .bold()
+                        
+                    }
+                
+                
+                
+                Rectangle()
+                    .frame(width:350, height: 1)
+                    .foregroundColor(.white)
+                    .padding(.bottom)
+                
+                TextField("", text: $lastName)
+                    .foregroundColor(.white)
+                    .textFieldStyle(.plain)
+                    .placeholder(when: lastName.isEmpty) {
+                        Text("last name")
+                            .foregroundColor(.white)
+                            .bold()
+                        
+                    }
+                
+                
+                
+                Rectangle()
+                    .frame(width:350, height: 1)
+                    .foregroundColor(.white)
+                    .padding(.bottom)
+                
+                TextField("", text: $username)
+                    .foregroundColor(.white)
+                    .textFieldStyle(.plain)
+                    .placeholder(when: username.isEmpty) {
+                        Text("username")
+                            .foregroundColor(.white)
+                            .bold()
+                        
+                    }
+                
+                
+                
+                Rectangle()
+                    .frame(width:350, height: 1)
+                    .foregroundColor(.white)
+                    .padding(.bottom)
                 
                 
                 
@@ -130,11 +185,19 @@ struct sleepscoreApp: App {
     }
     
     func register() {
+        
         Auth.auth().createUser(withEmail: email, password: password) {
             result, error in if error != nil {
                 print(error!.localizedDescription)
+            } else {
+                dataManager.addUser(firstName: firstName, lastName: lastName, username: username, email: email)
             }
         }
+        
+        
+        
+        
+        
     }
     
     

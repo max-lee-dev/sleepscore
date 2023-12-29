@@ -74,11 +74,15 @@ class HealthManager: ObservableObject {
                 self.sleeps["todaysDuration"] = sleep;
             }
             
+            
             completion(totalSleepTime, nil)
         }
         
         
         healthStore.execute(query)
+    }
+    
+    func addSleep(title: String, hours: String, minutes: String, date: String) {
     }
     
 }
