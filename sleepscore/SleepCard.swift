@@ -7,28 +7,18 @@
 
 import SwiftUI
 
-struct Sleep {
-    let id: Int
-    let title: String
-    let subtitle: String
-    let image: String
-    let hours: String
-    let minutes: String
-    let date: String
-}
-
 
 struct SleepCard: View {
-    @State var sleep: Sleep
+    @State var sleep: Sleep // required parameter?
     
     var body: some View {
         ZStack {
             
-            Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(20, corners: [.topLeft, .topRight])
+            Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(20)
             VStack (spacing: 20) {
                 HStack(alignment: .top) {
                     HStack {
-                        Text("LAST NIGHT")
+                        Text("TIME ASLEEP")
                             .font(.system(size:13))
                             .foregroundColor(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255, opacity: 0.75))
                         Spacer()
@@ -64,20 +54,22 @@ struct SleepCard: View {
 
                     Spacer()
                 }.padding(.horizontal)
+                ZStack {
+                    Color(red: 10/255, green: 8/255, blue: 73/255, opacity: 1)
+                    Text("your 4th best out of your past 10 sleeps!")
+                        .foregroundColor(.white)
+                        .padding()
+                        
+                }.frame(width: .infinity, height: 50)
+                    .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                 
                
-                Spacer()
             }
+            
            
-        }
-        ZStack {
-            Color(red: 10/255, green: 8/255, blue: 73/255, opacity: 1)
-            Text("your 4th best out of your past 10 sleeps!")
-                .foregroundColor(.white)
-                .padding()
-                
-        }.frame(width: .infinity, height: 50)
-            .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+        }.frame(maxHeight: 100)
+            
+       
         
         
        
@@ -104,6 +96,6 @@ struct RoundedCorner: Shape {
 
 struct SleepCard_Previews: PreviewProvider {
     static var previews: some View {
-        SleepCard(sleep: Sleep(id: 0, title: "hi", subtitle: "subtitle", image: "hourglass.bottomhalf.fille", hours: "5", minutes: "23", date: "date"))
+        SleepCard(sleep: Sleep(id: "id", user: "", hours: "5", minutes: "23", userEmail: "email", date: "saturday, dec 23"))
     }
 }

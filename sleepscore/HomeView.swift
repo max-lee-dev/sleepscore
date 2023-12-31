@@ -18,10 +18,12 @@ struct HomeView: View {
     
     
     @EnvironmentObject var manager: HealthManager
-    @StateObject var dataManager = DataManager() // Have my own dataManager that will have updated data! Not sure if this is good solution but it'll do
+    @EnvironmentObject var dataManager : DataManager // Have my own dataManager that will have updated data! Not sure if this is good solution but it'll do
     
     
-    
+    init() {
+//        dataManager.addSleep()
+    }
     
     
     var body: some View {
@@ -54,28 +56,28 @@ struct HomeView: View {
                         
                 }.padding()
                 
-                VStack {
-                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
-                        ForEach(manager.sleeps.sorted(by: {$0.value.id < $1.value.id}), id: \.key) {
-                            item in SleepCard(sleep: item.value)
-                        }
-                    }
-                    .padding()
-                    VStack {
+                VStack(spacing: 35) {
+                    ZStack {
                         if (dataManager.currentUserLoading == true) {
-                            Text("loading...")
+                            SleepCard(sleep: Sleep(id: "", user: "", hours: "...", minutes: "...", userEmail: "", date: ""))
                             
                         } else {
-                            Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
-                                .foregroundColor(.white)
+                            SleepCard(sleep: dataManager.todaysSleep ?? Sleep(id: "", user: "", hours: "", minutes: "3", userEmail: "", date: ""))
                         
                         }
+                       
+                      
                     }.padding()
+                    LastNightCard()
+                        .padding(.horizontal)
                     
-                    Spacer()
+                    
+                    LeaderboardCard()
+                        .padding(.horizontal)
                     
                 }.padding(.top)
                           
+               
                 Spacer()
 //                NavigationView {
 //                    List(dataManager.users, id: \.id) { user in
@@ -110,6 +112,7 @@ struct HomeView: View {
                         }
                     }
                 }
+            Spacer()
             
             
         }
@@ -121,5 +124,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(HealthManager())
+            .environmentObject(DataManager())
     }
 }

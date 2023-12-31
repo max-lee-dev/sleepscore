@@ -15,7 +15,6 @@ struct sleepscoreTabView: View {
             
         
             
-            TabView(selection: $selectedTab) {
                 
                 
                 
@@ -26,15 +25,11 @@ struct sleepscoreTabView: View {
                         Image(systemName: "house")
                     }
                     .environmentObject(manager)
-                    
-                LogIn()
-                    .tag("Log In")
-                    .tabItem{
-                        Image(systemName: "person")
-                    }
                     .environmentObject(dataManager)
+                    
+               
                 
-            }
+            
         }
 }
 

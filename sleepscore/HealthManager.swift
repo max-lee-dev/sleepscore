@@ -1,9 +1,12 @@
 import Foundation
 import HealthKit
+import Firebase
 extension Date {
     static var startOfDay: Date {
         Calendar.current.startOfDay(for: Date())
     }
+    
+    
     
 }
 
@@ -11,6 +14,7 @@ extension Date {
 
 class HealthManager: ObservableObject {
     let healthStore = HKHealthStore()
+    
     @Published var sleeps: [String: Sleep] = [:]
     
     init() {
@@ -27,7 +31,7 @@ class HealthManager: ObservableObject {
     }
     
    
-    func formatDateToString(_ date: Date) -> String {
+    func formatDateToString(    _ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d" // Format for "Wednesday, January 1"
         dateFormatter.locale = Locale(identifier: "en_US") // Set locale if needed
@@ -68,11 +72,19 @@ class HealthManager: ObservableObject {
            
             let (hours, minutes) = self.convertSecondsToHoursMinutes(seconds: totalSleepTime)
             
+            let email = Auth.auth().currentUser?.email
+            let documentName = "\(email ?? "")\(self.formatDateToString(sleepDate))"
             
-            let sleep = Sleep(id: 0, title: "hi", subtitle: "hi", image: "hourglass.bottomhalf.filled", hours: "\(hours)", minutes: "\(minutes)", date: self.formatDateToString(sleepDate))
-            DispatchQueue.main.async {
-                self.sleeps["todaysDuration"] = sleep;
-            }
+            
+            
+            
+            let sleep = Sleep(id: documentName, user: email ?? "", hours: "\(hours)", minutes: "\(minutes)", userEmail: email ?? "", date: self.formatDateToString(sleepDate))
+//            DispatchQueue.main.async {
+//                self.sleeps["todaysDuration"] = sleep;
+//                self.addSleep(sleep: sleep)
+//            }
+            
+            self.addSleep(sleep: sleep)
             
             
             completion(totalSleepTime, nil)
@@ -82,7 +94,24 @@ class HealthManager: ObservableObject {
         healthStore.execute(query)
     }
     
-    func addSleep(title: String, hours: String, minutes: String, date: String) {
+    func addSleep(sleep: Sleep) {
+        
+       
+        
+        let db = Firestore.firestore()
+        let ref = db.collection("sleeps").document(sleep.id)
+        ref.setData(["hours": sleep.hours, "minutes": sleep.minutes, "date": sleep.date, "id": sleep.id, "userEmail": sleep.userEmail, "user": sleep.user]) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
+    
+    func checkDailySleep() {
+        
+        
+    }
+    
+    
     
 }
