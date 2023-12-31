@@ -34,34 +34,71 @@ struct LastNightCard: View {
 //                        item in SleepCard(sleep: item.value)
 //                    }
 //                }
+                VStack(spacing: 10) {
+                    HStack(spacing: 0) {
+                        Text("pfpp  Samyok")
+                            .foregroundColor(.white)
+                        Text("  +105 pts")
+                            .foregroundColor(Color(red: 30/255, green: 151/255, blue: 0))
+                            .font(.system(size: 14))
+                            
+                        Spacer()
+                        Text("10")
+                            .foregroundColor(.white)
+                        Text("hr")
+                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
+                        Text(" 5")
+                            .foregroundColor(.white)
+                        Text("min")
+                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
+                    }.padding(.horizontal)
+                    
+                    
+                    HStack(spacing: 0) {
+                        Text("pfpp  Samyok")
+                            .foregroundColor(.white)
+                        Text("  +105 pts")
+                            .foregroundColor(Color(red: 30/255, green: 151/255, blue: 0))
+                            .font(.system(size: 14))
+                            
+                        Spacer()
+                        Text("10")
+                            .foregroundColor(.white)
+                        Text("hr")
+                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
+                        Text(" 5")
+                            .foregroundColor(.white)
+                        Text("min")
+                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
+                    }.padding(.horizontal)
+                }
                 
                 if (dataManager.currentUserLoading == true) {
                     Text("loading...")
                     
                 } else {
-                    Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
-                        .foregroundColor(.white)
+//                    Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
+//                        .foregroundColor(.white)
                 
                 }
-                Spacer()
                 
                 HStack {
                     Text("VIEW ALL")
                         .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
                         .font(.system(size: 10))
-                        .frame(width: 65, height: 30)
+                        .frame(width: 60, height: 20)
                         .padding(.horizontal)
                         .background(Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1))
                         .cornerRadius(20)
                     Spacer()
                 }
-                .padding()
+                .padding(.bottom)
+                .padding(.horizontal)
                 
             }
-            Spacer()
             
         }
-        .frame(maxHeight: 175)
+        .frame(maxHeight: 100)
     }
 }
 

@@ -56,46 +56,41 @@ struct HomeView: View {
                         
                 }.padding()
                 
-                VStack(spacing: 35) {
+                VStack(spacing: 5) {
                     ZStack {
                         if (dataManager.currentUserLoading == true) {
                             SleepCard(sleep: Sleep(id: "", user: "", hours: "...", minutes: "...", userEmail: "", date: ""))
                             
                         } else {
-                            SleepCard(sleep: dataManager.todaysSleep ?? Sleep(id: "", user: "", hours: "", minutes: "3", userEmail: "", date: ""))
+                            SleepCard(sleep: dataManager.todaysSleep ?? Sleep(id: "", user:         "", hours: "", minutes: "3", userEmail: "", date: ""))
                         
                         }
-                       
+                        
                       
                     }.padding()
-                    LastNightCard()
-                        .padding(.horizontal)
                     
-                    
-                    LeaderboardCard()
-                        .padding(.horizontal)
-                    
+                    AddFriendCard()
+                        .padding()
+                    VStack(spacing: 55) {
+                        
+                        LastNightCard()
+                            .padding()
+                            .padding(.top)
+                        
+                        
+                        
+                        LeaderboardCard()
+                            .padding()
+                    }
+                    Spacer()
                 }.padding(.top)
+                Spacer()
                           
                
-                Spacer()
-//                NavigationView {
-//                    List(dataManager.users, id: \.id) { user in
-//                        Text(user.displayName)
-//                    }
-//                    .navigationTitle("users")
-//                    .navigationBarItems(trailing: Button(action: {
-//                        dataManager.addUser(displayName: displayName)
-//                    }, label: {
-//                        Image(systemName: "plus")
-//                    }))
-//                    
-//                    
-//                    
-//                }
-//                TextField("User", text: $displayName)
-//                    .foregroundColor(.red)
                 
+                
+                
+               
             }
             
             

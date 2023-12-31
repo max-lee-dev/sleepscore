@@ -15,7 +15,7 @@ struct SleepCard: View {
         ZStack {
             
             Color(red: 102/255, green: 50/255, blue: 236/255, opacity: 1).cornerRadius(20)
-            VStack (spacing: 20) {
+            VStack (spacing: 10) {
                 HStack(alignment: .top) {
                     HStack {
                         Text("TIME ASLEEP")

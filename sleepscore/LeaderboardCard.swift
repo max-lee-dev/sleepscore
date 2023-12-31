@@ -49,19 +49,20 @@ struct LeaderboardCard: View {
                     Text("VIEW ALL")
                         .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
                         .font(.system(size: 10))
-                        .frame(width: 65, height: 30)
+                        .frame(width: 60, height: 20)
                         .padding(.horizontal)
                         .background(Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1))
                         .cornerRadius(20)
                     Spacer()
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.bottom)
                 
             }
             Spacer()
             
         }
-        .frame(maxHeight: 175)
+        .frame(maxHeight: 75)
     }
 }
 
