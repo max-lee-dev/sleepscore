@@ -16,7 +16,7 @@ struct LastNightCard: View {
         ZStack {
             
             Color(red: 44/255, green: 44/255, blue: 46/255, opacity: 1).cornerRadius(20)
-            VStack (spacing: 20) {
+            VStack {
                 HStack(alignment: .top) {
                     HStack {
                         Text("LAST NIGHT")
@@ -28,13 +28,14 @@ struct LastNightCard: View {
                     
                     
                 }
-                .padding(.horizontal).padding(.top)
+                .padding()
 //                LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
 //                    ForEach(dataManager.lastNightFriends.sorted(by: {$0.value.id < $1.value.id}), id: \.key) {
 //                        item in SleepCard(sleep: item.value)
 //                    }
 //                }
-                VStack(spacing: 10) {
+                Spacer()
+                VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 0) {
                         Text("pfpp  Samyok")
                             .foregroundColor(.white)
@@ -71,6 +72,7 @@ struct LastNightCard: View {
                         Text("min")
                             .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
                     }.padding(.horizontal)
+                    Spacer()
                 }
                 
                 if (dataManager.currentUserLoading == true) {
@@ -81,25 +83,29 @@ struct LastNightCard: View {
 //                        .foregroundColor(.white)
                 
                 }
+                Spacer()
                 
                 HStack {
                     Text("VIEW ALL")
                         .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
-                        .font(.system(size: 10))
-                        .frame(width: 60, height: 20)
+                        .font(.system(size: 13))
+                        .frame(width: 60, height: 30)
                         .padding(.horizontal)
                         .background(Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1))
                         .cornerRadius(20)
                     Spacer()
                 }
-                .padding(.bottom)
-                .padding(.horizontal)
+                .padding()
                 
             }
             
-        }
-        .frame(maxHeight: 100)
+            
+            
+        }.frame(height: 220)
+        
+        
     }
+    
 }
 
 

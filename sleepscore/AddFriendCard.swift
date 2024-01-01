@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct AddFriendCard: View {
+    @State private var showPopup = false
+    @EnvironmentObject var dataManager : DataManager
     var body: some View {
        
             ZStack {
 //                Color(red: 44/255, green: 44/255, blue: 46/255)
                 LinearGradient(gradient: Gradient(colors: [Color(red: 213/255, green: 51/255, blue: 105/255), Color(red: 218/255, green: 174/255, blue: 81/255)]), startPoint: .leading, endPoint: .trailing)
                 Button{
-                    
+                    showPopup.toggle()
                 } label: {
                     HStack(spacing:0) {
                         
@@ -32,7 +34,10 @@ struct AddFriendCard: View {
                     }
                     
                 }
-                
+                .sheet(isPresented: $showPopup) {
+                    AddFriendSheet()
+                        .environmentObject(dataManager)
+                }
                 
             }
             .frame(height:45)
@@ -44,4 +49,5 @@ struct AddFriendCard: View {
 
 #Preview {
     AddFriendCard()
+        .environmentObject(DataManager())
 }

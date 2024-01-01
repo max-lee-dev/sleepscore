@@ -9,6 +9,7 @@ import SwiftUI
 
 struct User: Identifiable {
     var id: String
+    var friends: [String] = []
     var firstName: String
     var lastName: String
     var username: String

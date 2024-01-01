@@ -29,71 +29,72 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Spacer()
-            Image("sleepscorehomebackground")
+            Image("sleepscorebackground")
                 .resizable()
-//                .aspectRatio(contentMode: .fill)
+            //                .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .ignoresSafeArea()
-            
-            VStack(spacing: 0){
-            
+            ScrollView {
                 
-                HStack {
-                    Text(manager.formatDateToString(now).lowercased()).fontWeight(.bold).font(.system(size: 27))
-                        .foregroundColor(.white)
+                VStack(spacing: 0){
+                    
+                    
+                    HStack {
+                        Text(manager.formatDateToString(now).lowercased()).fontWeight(.bold).font(.system(size: 27))
+                            .foregroundColor(.white)
                         
                         
-                    Spacer()
-                    HStack(spacing: 0) {
-                        Text("🔥5")
-                            .foregroundColor(.orange)
-                            .font(.title2)
-                            .bold()
-                            .frame(width: 60, height: 30)
-                    }.background(Color(red: 65/255, green: 36/255, blue: 138/255, opacity: 1))
-                        .cornerRadius(10)
-
+                        Spacer()
+                        HStack(spacing: 0) {
+                            Text("🔥5")
+                                .foregroundColor(.orange)
+                                .font(.title2)
+                                .bold()
+                                .frame(width: 60, height: 30)
+                        }.background(Color(red: 65/255, green: 36/255, blue: 138/255, opacity: 1))
+                            .cornerRadius(10)
                         
-                }.padding()
-                
-                VStack(spacing: 5) {
-                    ZStack {
-                        if (dataManager.currentUserLoading == true) {
-                            SleepCard(sleep: Sleep(id: "", user: "", hours: "...", minutes: "...", userEmail: "", date: ""))
-                            
-                        } else {
-                            SleepCard(sleep: dataManager.todaysSleep ?? Sleep(id: "", user:         "", hours: "", minutes: "3", userEmail: "", date: ""))
                         
-                        }
-                        
-                      
                     }.padding()
                     
-                    AddFriendCard()
-                        .padding()
-                    VStack(spacing: 55) {
+                    VStack(spacing: 5) {
+                        ZStack {
+                            if (dataManager.currentUserLoading == true) {
+                                SleepCard(sleep: Sleep(id: "", user: "", hours: "...", minutes: "...", userEmail: "", date: ""))
+                                
+                            } else {
+                                SleepCard(sleep: dataManager.todaysSleep ?? Sleep(id: "", user:         "", hours: "", minutes: "3", userEmail: "", date: ""))
+                                
+                            }
+                            
+                            
+                        }.padding()
                         
-                        LastNightCard()
+                        AddFriendCard()
                             .padding()
-                            .padding(.top)
-                        
-                        
-                        
-                        LeaderboardCard()
-                            .padding()
-                    }
+                            .environmentObject(dataManager)
+                        VStack(spacing: 15) {
+                            
+                            LastNightCard()
+                                .padding(.horizontal)
+                            
+                            
+                            
+                            LeaderboardCard()
+                                .padding(.horizontal)
+                        }
+                        Spacer()
+                    }.padding(.top)
                     Spacer()
-                }.padding(.top)
-                Spacer()
-                          
-               
+                    
+                    
+                    
+                    
+                    
+                    
+                }
                 
                 
-                
-               
-            }
-            
-            
                 .onAppear {
                     // Call the method to fetch sleep duration when the  view appears
                     if let yesterday = calendar.date(byAdding: .day, value: -1, to: now)  {
@@ -107,11 +108,11 @@ struct HomeView: View {
                         }
                     }
                 }
-            Spacer()
-            
-            
+                Spacer()
+                
+                
+            }
         }
-
     }
 }
 

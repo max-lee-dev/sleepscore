@@ -15,6 +15,8 @@ class DataManager: ObservableObject {
     @Published var test = true
     @Published var loggedIn = false
     @Published var todaysSleep : Sleep?
+    @Published var queryUsers: [User] = []
+    @Published var thisUserFriends: [String] = []
     let calendar = Calendar.current
     
     init() {
@@ -22,7 +24,6 @@ class DataManager: ObservableObject {
         fetchUsers()
         fetchCurUser()
         getTodaysSleep()
-        
     }
     
     
@@ -47,14 +48,52 @@ class DataManager: ObservableObject {
                     let username = data["username"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
                     let id = data["id"] as? String ?? ""
+                    let friends = data["friends"] as? [String] ?? []
                     
-                    let tempuser = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email)
+                    let tempuser = User(id: id, friends: friends, firstName: firstName, lastName: lastName, username: username, email: email)
                     self.users.append(tempuser)
+                    self.queryUsers.append(tempuser)
                 }
             }
             
         }
     }
+    
+    func addFriend(myID: String, username: String) {
+        if (thisUserFriends.contains(username) || username == currentUser?.username) {
+            return
+        }
+        var friends = thisUserFriends
+        friends.append(username) // do friend request instead
+        self.thisUserFriends = friends // update
+        
+        
+        let db = Firestore.firestore()
+
+        let docRef = db.collection("users").document(myID)
+
+            docRef.updateData(["friends": friends]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                } else {
+                    print("Document successfully updated!")
+                }
+            }
+        
+        
+    }
+    
+    func getQueryUsers(query: String) {
+        queryUsers.removeAll()
+        for user in users {
+            if (user.username.contains(query) || user.firstName.contains(query) || user.lastName.contains(query)) {
+                self.queryUsers.append(user)
+                print(user)
+            }
+        }
+    }
+    
+    
     
     func fetchCurUser() {
         let db = Firestore.firestore()
@@ -75,9 +114,11 @@ class DataManager: ObservableObject {
                         let username = data["username"] as? String ?? ""
                         let email = data["email"] as? String ?? ""
                         let id = data["id"] as? String ?? ""
+                        let friends = data["friends"] as? [String] ?? []
+                        self.thisUserFriends = friends
                         
                         
-                        let user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email)
+                        let user = User(id: id, friends: friends, firstName: firstName, lastName: lastName, username: username, email: email)
                         self.currentUser = user
                     }
 

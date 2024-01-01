@@ -35,21 +35,21 @@ struct LeaderboardCard: View {
 //                    }
 //                }
                 
-                if (dataManager.currentUserLoading == true) {
-                    Text("loading...")
-                    
-                } else {
-                    Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
-                        .foregroundColor(.white)
-                
-                }
+//                if (dataManager.currentUserLoading == true) {
+//                    Text("loading...")
+//                    
+//                } else {
+//                    Text ("Sadly, you have no friends  \(dataManager.currentUser?.firstName ?? "oh")!")
+//                        .foregroundColor(.white)
+//                
+//                }
                 Spacer()
                 
                 HStack {
                     Text("VIEW ALL")
                         .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
-                        .font(.system(size: 10))
-                        .frame(width: 60, height: 20)
+                        .font(.system(size: 13))
+                        .frame(width: 60, height: 30)
                         .padding(.horizontal)
                         .background(Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1))
                         .cornerRadius(20)
@@ -59,10 +59,10 @@ struct LeaderboardCard: View {
                 .padding(.bottom)
                 
             }
-            Spacer()
             
         }
-        .frame(maxHeight: 75)
+        .frame(height: 220)
+        
     }
 }
 

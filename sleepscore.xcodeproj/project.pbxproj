@@ -48,6 +48,9 @@
 		9DB7800A2B41011C003A147F /* LastNightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB780092B41011C003A147F /* LastNightCard.swift */; };
 		9DB7800C2B410967003A147F /* LeaderboardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB7800B2B410967003A147F /* LeaderboardCard.swift */; };
 		9DB780102B416ABC003A147F /* AddFriendCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB7800F2B416ABC003A147F /* AddFriendCard.swift */; };
+		9DB780122B41F38D003A147F /* AddFriendSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB780112B41F38D003A147F /* AddFriendSheet.swift */; };
+		9DB780162B422A9F003A147F /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 9DB780152B422A9E003A147F /* Poppins */; };
+		9DB780182B422D5B003A147F /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB780172B422D5B003A147F /* ProfileCard.swift */; };
 		9DDE59AF2B38AED400F48106 /* SleepCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE59AE2B38AED400F48106 /* SleepCard.swift */; };
 		9DDE59B12B38B18D00F48106 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE59B02B38B18D00F48106 /* HealthManager.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +72,9 @@
 		9DB780092B41011C003A147F /* LastNightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastNightCard.swift; sourceTree = "<group>"; };
 		9DB7800B2B410967003A147F /* LeaderboardCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCard.swift; sourceTree = "<group>"; };
 		9DB7800F2B416ABC003A147F /* AddFriendCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCard.swift; sourceTree = "<group>"; };
+		9DB780112B41F38D003A147F /* AddFriendSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendSheet.swift; sourceTree = "<group>"; };
+		9DB780152B422A9E003A147F /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Poppins; sourceTree = "<group>"; };
+		9DB780172B422D5B003A147F /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		9DDE59AE2B38AED400F48106 /* SleepCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCard.swift; sourceTree = "<group>"; };
 		9DDE59B02B38B18D00F48106 /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,10 +120,12 @@
 		9D3B93922B328599006849DC = {
 			isa = PBXGroup;
 			children = (
+				9DB780152B422A9E003A147F /* Poppins */,
 				9D3B939D2B328599006849DC /* sleepscore */,
 				9D3B939C2B328599006849DC /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		9D3B939C2B328599006849DC /* Products */ = {
 			isa = PBXGroup;
@@ -147,6 +155,8 @@
 				9DB780092B41011C003A147F /* LastNightCard.swift */,
 				9DB7800B2B410967003A147F /* LeaderboardCard.swift */,
 				9DB7800F2B416ABC003A147F /* AddFriendCard.swift */,
+				9DB780112B41F38D003A147F /* AddFriendSheet.swift */,
+				9DB780172B422D5B003A147F /* ProfileCard.swift */,
 			);
 			path = sleepscore;
 			sourceTree = "<group>";
@@ -249,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DB780162B422A9F003A147F /* Poppins in Resources */,
 				9D3B93A72B32859A006849DC /* Preview Assets.xcassets in Resources */,
 				9D3B93A32B32859A006849DC /* Assets.xcassets in Resources */,
 				9D31BE692B3CE10200A9EB60 /* GoogleService-Info.plist in Resources */,
@@ -267,8 +278,10 @@
 				9D31BE6B2B3CEA2300A9EB60 /* DataManager.swift in Sources */,
 				9DDE59B12B38B18D00F48106 /* HealthManager.swift in Sources */,
 				9DB7800A2B41011C003A147F /* LastNightCard.swift in Sources */,
+				9DB780182B422D5B003A147F /* ProfileCard.swift in Sources */,
 				9DB780102B416ABC003A147F /* AddFriendCard.swift in Sources */,
 				9D3B93BA2B328B22006849DC /* sleepscoreTabView.swift in Sources */,
+				9DB780122B41F38D003A147F /* AddFriendSheet.swift in Sources */,
 				9D31BE6D2B3CEB1600A9EB60 /* User.swift in Sources */,
 				9DB7800C2B410967003A147F /* LeaderboardCard.swift in Sources */,
 				9D3B93A12B328599006849DC /* ContentView.swift in Sources */,
