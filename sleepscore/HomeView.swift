@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 
 struct HomeView: View {
@@ -22,7 +23,8 @@ struct HomeView: View {
     
     
     init() {
-//        dataManager.addSleep()
+        
+        
     }
     
     
@@ -36,6 +38,13 @@ struct HomeView: View {
                 .ignoresSafeArea()
             ScrollView {
                 
+                Button{
+                    try! Auth.auth().signOut()
+
+                } label: {
+                    Text(dataManager.currentUser?.username ?? "asd")
+                }
+                
                 VStack(spacing: 0){
                     
                     
@@ -45,6 +54,7 @@ struct HomeView: View {
                         
                         
                         Spacer()
+                       
                         HStack(spacing: 0) {
                             Text("🔥5")
                                 .foregroundColor(.orange)

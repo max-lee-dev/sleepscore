@@ -166,7 +166,12 @@ struct sleepscoreApp: App {
             .onAppear {
                 Auth.auth().addStateDidChangeListener{auth, user in
                     if user != nil {
+                        
                         dataManager.logIn()
+                        dataManager.getTodaysSleep()
+
+                    } else {
+                        dataManager.logOut()
                     }
                 }
             }
@@ -217,3 +222,4 @@ extension View {
         }
     }
 }
+

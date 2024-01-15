@@ -15,7 +15,7 @@ struct ProfileCard: View {
     var body: some View {
         ZStack {
             
-            Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1).cornerRadius(20)
+            Color(red: 72/255, green: 72/255, blue: 74/255, opacity: 1).cornerRadius(10)
             VStack (spacing: 10) {
                
 //                LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1)) {
@@ -39,7 +39,7 @@ struct ProfileCard: View {
                             Spacer()
                         }
                         HStack {
-                            Text("@maxlee1")
+                            Text("@\(user!.username)")
                                 .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.75))
                                 .font(.system(size: 16))
                             Spacer()
@@ -55,7 +55,7 @@ struct ProfileCard: View {
                 
                 
                 Button {
-                    dataManager.addFriend(myID: dataManager.currentUser?.id ?? "", username: user!.username)
+                    dataManager.addFriendRequest(myID: dataManager.currentUser?.id ?? "", user: user!)
 
                 } label : {
                     
@@ -77,10 +77,10 @@ struct ProfileCard: View {
                                 
                         }
                         .frame(width: 325, height: 40)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(LinearGradient(gradient: Gradient(colors: [Color(red: 213/255, green: 51/255, blue: 105/255), Color(red: 218/255, green: 174/255, blue: 81/255)]), startPoint: .leading, endPoint: .trailing), lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(LinearGradient(gradient: Gradient(colors: [Color(red: 213/255, green: 51/255, blue: 105/255), Color(red: 218/255, green: 174/255, blue: 81/255)]), startPoint: .leading, endPoint: .trailing), lineWidth: 3)
                         )
                         .padding(.bottom)
                         

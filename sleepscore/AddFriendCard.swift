@@ -8,40 +8,38 @@
 import SwiftUI
 
 struct AddFriendCard: View {
-    @State private var showPopup = false
+    
     @EnvironmentObject var dataManager : DataManager
     var body: some View {
-       
+        
+        NavigationLink(destination: AddFriendSheet(), label: {
             ZStack {
-//                Color(red: 44/255, green: 44/255, blue: 46/255)
+                //                Color(red: 44/255, green: 44/255, blue: 46/255)
                 LinearGradient(gradient: Gradient(colors: [Color(red: 213/255, green: 51/255, blue: 105/255), Color(red: 218/255, green: 174/255, blue: 81/255)]), startPoint: .leading, endPoint: .trailing)
-                Button{
-                    showPopup.toggle()
-                } label: {
-                    HStack(spacing:0) {
+                
+                HStack(spacing:0) {
+                    
+                    Text("add friends")
+                        .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
+                    
+                        .font(.system(size:20))
+                        .bold()
+                    
+                    Text(" to score your sleep with!")
+                        .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
+                        .font(.system(size:17))
+                    
                         
-                        Text("add friends")
-                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
-                            
-                            .font(.system(size:20))
-                            .bold()
-                        
-                        Text(" to score your sleep with!")
-                            .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
-                            .font(.system(size:17))
-                            
-                        
-                    }
+                    
                     
                 }
-                .sheet(isPresented: $showPopup) {
-                    AddFriendSheet()
-                        .environmentObject(dataManager)
-                }
+                
                 
             }
             .frame(height:45)
             .cornerRadius(15)
+            
+    })
         
         
     }
